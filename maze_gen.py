@@ -1,6 +1,6 @@
 import random
 
-WIDTH: int = 20
+WIDTH: int = 21
 HEIGHT: int = 12
 
 
@@ -10,9 +10,9 @@ OPPOSITES: dict[str, str] = {"n":"s",
                              "w":"e"}
 
 
-PATTERN: list[list[int]] = [[0,1,0,0,0,1,1,0],
+PATTERN: list[list[int]] = [[0,1,0,0,0,1,1,1],
                             [0,1,0,0,0,0,0,1],
-                            [0,1,0,1,0,1,1,0],
+                            [0,1,0,1,0,1,1,1],
                             [0,1,1,1,0,1,0,0],
                             [0,0,0,1,0,1,1,1]]
 #center of the 42 pattern is [y=2, x=4]
@@ -82,7 +82,21 @@ class MazeGenerator():
                 if PATTERN[py][px] == 1:
                     maze[oy + py][ox + px].is_pattern = 1 
 
-
+    def get_neighbors(self,
+                      maze: list[list[Cell]],
+                      y: int,
+                      x: int) -> list[tuple[str ,int , int]]:
+        valid_directions: list[tuple[str, int, int]] = []
+        if (y + 1) < HEIGHT and maze[y + 1][x].is_checked == 0 and maze[y + 1][x].is_pattern == 0:
+            valid_directions.append(("s" ,y + 1 , x))
+        if (y - 1) >= 0 and maze[y - 1][x].is_checked == 0 and maze[y - 1][x].is_pattern == 0:
+            valid_directions.append(("n" ,y - 1 , x))
+        if (x + 1) < WIDTH and maze[y][x + 1].is_checked == 0 and maze[y][x + 1].is_pattern == 0:
+            valid_directions.append(("e", y, x + 1))
+        if (x - 1) >= 0 and maze[y][x - 1].is_checked == 0 and maze[y][x - 1].is_pattern == 0:
+            valid_directions.append(("w", y, x - 1))
+        return (valid_directions)
+         
     def generate(self,
                  width: int,
                  height: int) -> list[list[Cell]]:
