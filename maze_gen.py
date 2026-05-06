@@ -67,13 +67,25 @@ def display_maze(maze: list[list[Cell]]):
 
 #--------------------
 
-class maze_gen():
+class MazeGenerator():
     def __init__ (self) -> None:
         self.width = WIDTH
         self.height = HEIGHT
 
 
-    def gen_maze(width: int, height: int) -> list[list[Cell]]:
+    def apply_pattern(self,
+                      maze: list[list[Cell]]) -> None:
+        oy: int = (len(maze) - len(PATTERN)) // 2
+        ox: int = (len(maze[0]) - len(PATTERN[0])) // 2
+        for py in range(len(PATTERN)):
+            for px in range(len(PATTERN[0])):
+                if PATTERN[py][px] == 1:
+                    maze[oy + py][ox + px].is_pattern = 1 
+
+
+    def generate(self,
+                 width: int,
+                 height: int) -> list[list[Cell]]:
         maze: list[list[Cell]] = []
 
         for _ in range(height):
@@ -82,24 +94,14 @@ class maze_gen():
                 cell: Cell = Cell()
                 row.append(cell)
             maze.append(row)
-
-        apply_pattern(maze)
+        self.apply_pattern(maze)
         display_maze(maze)
         return (maze)
-
-#---------------------
-
-def apply_pattern(maze: list[list[Cell]]) -> None:
-    oy: int = (len(maze) - len(PATTERN)) // 2
-    ox: int = (len(maze[0]) - len(PATTERN[0])) // 2
-    for py in range(len(PATTERN)):
-        for px in range(len(PATTERN[0])):
-            if PATTERN[py][px] == 1:
-                maze[oy + py][ox + px].is_pattern = 1 
             
 #----------------------
-
-
+def main() -> None:
+    maze_gen: MazeGenerator = MazeGenerator()
+    maze: list[list[Cell]] = maze_gen.generate(WIDTH, HEIGHT)
 
 if __name__ == "__main__":
-    gen_maze(11, 11)
+    main()
