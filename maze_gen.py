@@ -1,7 +1,34 @@
 import random
+import shutil
+import subprocess
 
-WIDTH: int = 21
-HEIGHT: int = 12
+
+subprocess.run(["clear"])
+
+
+WIDTH: int = 20
+HEIGHT: int = 10
+
+
+while True:
+    SYMBOL: str = input("Choose a symbol: ")
+    if len(SYMBOL) != 1:
+        print("Invalid character, repeat!")
+    else:
+        break
+
+
+COLUMNS = shutil.get_terminal_size().columns
+
+
+print("  ▄████████           ▄▄▄▄███▄▄▄▄      ▄████████  ▄███████▄     ▄████████          ▄█  ███▄▄▄▄      ▄██████▄  ".center(COLUMNS))
+print("  ███    ███         ▄██▀▀▀███▀▀▀██▄   ███    ███ ██▀     ▄██   ███    ███         ███  ███▀▀▀██▄   ███    ███".center(COLUMNS))
+print("  ███    ███         ███   ███   ███   ███    ███       ▄███▀   ███    █▀          ███▌ ███   ███   ███    █▀ ".center(COLUMNS))
+print("  ███    ███         ███   ███   ███   ███    ███  ▀█▀▄███▀▄▄  ▄███▄▄▄             ███▌ ███   ███  ▄███       ".center(COLUMNS))
+print("▀███████████ ███████ ███   ███   ███ ▀███████████   ▄███▀  ▀  ▀▀███▀▀▀     ███████ ███▌ ███   ███ ▀▀███ ████▄ ".center(COLUMNS))
+print("  ███    ███         ███   ███   ███   ███    ███ ▄███▀         ███    █▄          ███  ███   ███   ███    ███".center(COLUMNS))
+print("  ███    ███         ███   ███   ███   ███    ███ ███▄     ▄█   ███    ███         ███  ███   ███   ███    ███".center(COLUMNS))
+print("  ███    █▀           ▀█   ███   █▀    ███    █▀   ▀████████▀   ██████████         █▀    ▀█   █▀    ████████▀ ".center(COLUMNS), end ="\n"*6)
 
 
 OPPOSITES: dict[str, str] = {"n": "s",
@@ -10,15 +37,18 @@ OPPOSITES: dict[str, str] = {"n": "s",
                              "w": "e"}
 
 
-PATTERN: list[list[int]] = [[0, 1, 0, 0, 0, 1, 1, 1],
-                            [0, 1, 0, 0, 0, 0, 0, 1],
-                            [0, 1, 0, 1, 0, 1, 1, 1],
-                            [0, 1, 1, 1, 0, 1, 0, 0],
-                            [0, 0, 0, 1, 0, 1, 1, 1]]
+PATTERN: list[list[int]] = [[0, 0, 1, 0, 0, 1, 1, 1],
+                            [0, 1, 1, 0, 0, 0, 0, 1],
+                            [1, 0, 1, 0, 0, 1, 1, 1],
+                            [1, 1, 1, 1, 0, 1, 0, 0],
+                            [0, 0, 1, 0, 0, 1, 1, 1]]
 
 
 MIN_WIDTH: int = len(PATTERN[0]) + 2
 MIN_HEIGHT: int = len(PATTERN) + 2
+
+
+START_POINT = (COLUMNS//2) - (WIDTH * 2)
 
 
 class Cell():
@@ -37,29 +67,35 @@ def display_maze(maze: list[list[Cell]]) -> None:
 
     for y in range(height):
         for x in range(width):
+            if x == 0:
+                print(" " * START_POINT, end="")
             print("██", end="")
             if maze[y][x].walls["n"] == 1:
-                print("████", end="")
+                print("██", end="")
+            else:
+                print("  ", end="")
+        print("██")
+
+        for x in range(width):
+            if x == 0:
+                print(" " * START_POINT, end="")
+            if maze[y][x].walls["w"] == 1:
+                if maze[y][x].is_pattern == 1:
+                    print(f"██\033[32m{SYMBOL}{SYMBOL}\033[0m", end="")
+                else:
+                    print("██  ", end="")
             else:
                 print("    ", end="")
         print("██")
 
-        for x in range(width):
-            if maze[y][x].walls["w"] == 1:
-                if maze[y][x].is_pattern == 1:
-                    print("██ #  ", end="")
-                else:
-                    print("██    ", end="")
-            else:
-                print("      ", end="")
-        print("██")
-
     for x in range(width):
+        if x == 0:
+            print(" " * START_POINT, end="")
         print("██", end="")
         if maze[height - 1][x].walls["s"] == 1:
-            print("████", end="")
+            print("██", end="")
         else:
-            print("      ", end="")
+            print("    ", end="")
     print("██")
 
 
