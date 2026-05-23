@@ -37,30 +37,30 @@ def display_maze(maze: list[list[Cell]]) -> None:
 
     for y in range(height):
         for x in range(width):
-            print("+", end="")
+            print("██", end="")
             if maze[y][x].walls["n"] == 1:
-                print("---", end="")
+                print("██████", end="")
             else:
-                print("   ", end="")
-        print("+")
+                print("      ", end="")
+        print("██")
 
         for x in range(width):
             if maze[y][x].walls["w"] == 1:
                 if maze[y][x].is_pattern == 1:
-                    print("| # ", end="")
+                    print("██   #  ", end="")
                 else:
-                    print("|   ", end="")
+                    print("██      ", end="")
             else:
-                print("    ", end="")
-        print("|")
+                print("        ", end="")
+        print("██")
 
     for x in range(width):
-        print("+", end="")
+        print("██", end="")
         if maze[height - 1][x].walls["s"] == 1:
-            print("---", end="")
+            print("██████", end="")
         else:
-            print("   ", end="")
-    print("+")
+            print("      ", end="")
+    print("██")
 
 
 class MazeGenerator():
