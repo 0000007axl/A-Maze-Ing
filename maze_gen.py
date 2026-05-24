@@ -89,6 +89,7 @@ class MazeGenerator():
 
 
 def main() -> None:
+    display.print_title()
     maze_gen: MazeGenerator = MazeGenerator()
     maze_gen.generate(vars.WIDTH, vars.HEIGHT)
 

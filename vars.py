@@ -12,11 +12,11 @@ OPPOSITES: dict[str, str] = {"n": "s",
                              "e": "w",
                              "w": "e"}
 
-PATTERN: list[list[int]] = [[0, 0, 1, 0, 0, 0, 1, 1, 0],
-                            [0, 1, 1, 0, 0, 1, 0, 0, 1],
-                            [1, 0, 1, 0, 0, 0, 0, 1, 0],
-                            [1, 1, 1, 1, 0, 0, 1, 0, 0],
-                            [0, 0, 1, 0, 0, 1, 1, 1, 1]]
+PATTERN: list[list[int]] = [[0, 0, 1, 0, 0, 1, 1, 0],
+                            [0, 1, 1, 0, 1, 0, 0, 1],
+                            [1, 0, 1, 0, 0, 0, 1, 0],
+                            [1, 1, 1, 1, 0, 1, 0, 0],
+                            [0, 0, 1, 0, 1, 1, 1, 1]]
 
 
 def get_dimensions():
@@ -24,9 +24,11 @@ def get_dimensions():
         try:
             w = int(input("Enter maze's width: "))
             h = int(input("Enter maze's height: "))
+#            entry_x, entry_y = input("Enter entry point (x,y): ")
+#            exit_x, exit_y = input("Enter exit point (x,y): ")
             if not (1 <= h <= COLUMNS // 6 or 1 <= w <= ROWS//6):
                raise ValueError()
-            return w, h
+            return w, h #, (entry_x, entry_y), (exit_x, exit_y)
         except ValueError:
             subprocess.run(["clear"])
             print("Please input a valid number, don't be stupid.")
