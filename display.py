@@ -18,6 +18,7 @@ print("  ███    █▀       ▀█   ███   █▀    ███    �
 
 
 
+
 def display_maze(maze: list[list[maze_gen.Cell]]) -> None:                     
     height: int = len(maze)
     width: int = len(maze[0])
