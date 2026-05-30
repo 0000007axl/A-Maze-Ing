@@ -27,7 +27,7 @@ def display_maze(maze: list[list[maze_gen.Cell]]) -> None:
         for x in range(width):
             if x == 0:
                 print(" " * vars.START_POINT, end="")
-            print("\033[90m██", end="")
+            print(f"{vars.WALL_COLOR}██", end="")
             if maze[y][x].walls["n"] == 1:
                 print("██", end="")
             else:
@@ -39,9 +39,9 @@ def display_maze(maze: list[list[maze_gen.Cell]]) -> None:
                 print(" " * vars.START_POINT, end="")
             if maze[y][x].walls["w"] == 1:
                 if maze[y][x].is_pattern == 1:
-                    print("\033[90m██\033[96m██\033[0m", end="")
+                    print(f"{vars.WALL_COLOR}██\033[96m██\033[0m", end="")
                 else:
-                    print("\033[90m██  ", end="")
+                    print(f"{vars.WALL_COLOR}██  ", end="")
             else:
                 print("    ", end="")
         print("██")

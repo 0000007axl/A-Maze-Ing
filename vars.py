@@ -1,11 +1,11 @@
 import shutil
 import subprocess
-
+import random
 
 COLUMNS = shutil.get_terminal_size().columns
 ROWS = shutil.get_terminal_size().lines
 
-SYMBOL = "##"
+WALL_COLOR: str = random.choice(["\033[90m", "\033[189m", "\033[69m"])
 
 OPPOSITES: dict[str, str] = {"n": "s",
                              "s": "n",
