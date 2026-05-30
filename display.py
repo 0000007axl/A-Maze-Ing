@@ -14,12 +14,11 @@ def print_title():
      ███    ███     ███   ███   ███   ███    ███ ███▄     ▄█   ███    ███     ███  ███   ███   ███    ███
      ███    █▀       ▀█   ███   █▀    ███    █▀   ▀████████▀   ██████████     █▀    ▀█   █▀    ████████▀ 
     """
-
     print("\n"*2)
     for line in title.splitlines():
         print(line.center(vars.COLUMNS))
-    print("\n" * 8)
-
+    print("\n")
+    print(("P : Play").center(vars.COLUMNS), end="\n"*2)
 def display_maze(maze: list[list[maze_gen.Cell]]) -> None:                     
     height: int = len(maze)
     width: int = len(maze[0])
