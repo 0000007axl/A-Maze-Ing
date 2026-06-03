@@ -1,6 +1,5 @@
 import random
 import vars
-import display
 import subprocess
 
 
@@ -81,16 +80,4 @@ class MazeGenerator():
         if vars.HEIGHT > len(vars.PATTERN) and vars.WIDTH > len(vars.PATTERN[0]):
             self.apply_pattern(maze)
         self.create_paths(maze)
-        display.display_maze(maze)
         return (maze)
-
-
-def main() -> None:
-    subprocess.run(["clear"])
-    display.print_title()
-    maze_gen: MazeGenerator = MazeGenerator()
-    maze_gen.generate(vars.WIDTH, vars.HEIGHT)
-
-
-if __name__ == "__main__":
-    main()

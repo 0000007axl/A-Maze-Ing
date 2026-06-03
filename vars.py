@@ -1,6 +1,5 @@
 import shutil
 import random
-import maze_utils
 
 COLUMNS = shutil.get_terminal_size().columns
 ROWS = shutil.get_terminal_size().lines
@@ -21,10 +20,10 @@ PATTERN: list[list[int]] = [[0, 0, 1, 0, 0, 1, 1, 0],
                             [0, 0, 1, 0, 1, 1, 1, 1]]
 
 
-WIDTH, HEIGHT = maze_utils.get_dimensions()
+WIDTH, HEIGHT = 0, 0
 
 
 MIN_WIDTH: int = len(PATTERN[0]) + 2
 MIN_HEIGHT: int = len(PATTERN) + 2
 
-START_POINT = (COLUMNS//2) - (WIDTH * 2)
+START_POINT = (COLUMNS//4) - (WIDTH * 2)
