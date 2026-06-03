@@ -1,8 +1,7 @@
 import shutil
 import random
 
-COLUMNS = shutil.get_terminal_size().columns
-ROWS = shutil.get_terminal_size().lines
+COLUMNS, LINES = shutil.get_terminal_size()
 
 WALL_COLOR: str = random.choice(["\033[38;5;104m",
                                  "\033[38;5;110m",
