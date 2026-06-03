@@ -1,6 +1,7 @@
 import vars
 import subprocess
 
+
 def get_dimensions():
     while True:
         try:
@@ -14,3 +15,4 @@ def get_dimensions():
             subprocess.run(["clear"])
             print("\n"*4, (invalid_value_message).center(vars.COLUMNS))
             continue
+
