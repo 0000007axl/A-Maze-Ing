@@ -16,11 +16,11 @@ def welcome_screen():
         print(".", end="", flush=True)
     time.sleep(1)
     vars.WIDTH, vars.HEIGHT = maze_utils.get_dimensions()
+    subprocess.run(["clear"])
 
 
 def main() -> None:
-    #welcome_screen()
-    vars.WIDTH, vars.HEIGHT = maze_utils.get_dimensions()
+    welcome_screen()
     display.print_title()
     maze_g: maze_gen.MazeGenerator = maze_gen.MazeGenerator()
     maze = maze_g.generate(vars.WIDTH, vars.HEIGHT)
